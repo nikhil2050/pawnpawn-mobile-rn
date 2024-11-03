@@ -134,3 +134,7 @@ dist
 
 expo-env.d.ts
 # @end expo-cli
+
+.expo/
+package-lock.json
+.expo/types/router.d.ts
