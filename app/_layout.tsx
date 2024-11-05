@@ -1,18 +1,36 @@
-import React from "react"
-import { Stack } from "expo-router";
-import { StatusBar } from "expo-status-bar";
+import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { useFonts } from 'expo-font';
+import { SplashScreen, Stack } from 'expo-router';
+import { useEffect } from 'react';
+import { useColorScheme } from 'react-native';
 
-const RootLayout = () => {
+// Prevent SplashScreen from Autohiding before assets loading is complete
+SplashScreen.preventAutoHideAsync()
+
+export default function Layout() {
+
+  const colorScheme = useColorScheme();
+
+  const [loaded] = useFonts({
+    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf")
+  })
+
+  useEffect( () => {
+    if(loaded) {
+      SplashScreen.hideAsync()
+    }
+  }, [loaded])
+
+  if(!loaded) {
+    return null;
+  }
+
   return (
-    <>
-      <Stack screenOptions={{ headerShown:false }}>
+    <ThemeProvider value={colorScheme==='dark'?DarkTheme:DefaultTheme}>
+      <Stack screenOptions={{headerShown:false}} >
         <Stack.Screen name="index" />
-        <Stack.Screen name="signup" />
-        <Stack.Screen name="login" />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       </Stack>
-      <StatusBar backgroundColor="white" style="dark" />
-    </>
+    </ThemeProvider>
   );
 }
-
-export default RootLayout
