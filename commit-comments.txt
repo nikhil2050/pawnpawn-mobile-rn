@@ -1,0 +1,6 @@
+18-11-2024 : Updated to new Expo Architecture SDK ver52
+Updated to React Native's "New Architecture"
+Reference:  https://docs.expo.dev/guides/new-architecture/
+            https://blog.expo.dev/the-new-expo-cli-f4250d8e3421
+
+---
