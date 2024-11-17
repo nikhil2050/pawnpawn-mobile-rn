@@ -138,3 +138,6 @@ expo-env.d.ts
 .expo/
 package-lock.json
 .expo/types/router.d.ts
+assets/images/.DS_Store
+.expo/types/router.d.ts
+package-lock.json

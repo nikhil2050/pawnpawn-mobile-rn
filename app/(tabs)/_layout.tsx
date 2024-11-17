@@ -1,14 +1,16 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
-
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { StatusBar } from 'expo-status-bar';
-import { Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+
+  const fgColor = '#FFD700';
+  const bgColor = '#0D0D0D';
 
   return (
     <>
@@ -16,15 +18,20 @@ export default function TabLayout() {
 
       <Tabs
         screenOptions={{
-          tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+          tabBarActiveTintColor: fgColor,   //Colors[colorScheme ?? 'light'].tint,
           headerShown: false,
+          tabBarInactiveTintColor: fgColor, // Inactive tab text/icon color (optional)
+          tabBarStyle: {
+            backgroundColor: bgColor,       // Set tab bar background color to black
+          },
+      
         }}>
         <Tabs.Screen
           name="index"
           options={{
             title: 'Products',
             tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+              <TabBarIcon name={focused ? 'home' : 'home-outline'} color={fgColor} />
             ),
           }}
         />
@@ -33,7 +40,7 @@ export default function TabLayout() {
           options={{
             title: 'Explore',
             tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon name={focused ? 'search' : 'search-outline'} color={color} />
+              <TabBarIcon name={focused ? 'search' : 'search-outline'} color={fgColor} />
             ),
           }}
         />
@@ -42,7 +49,7 @@ export default function TabLayout() {
           options={{
             title: 'Auction',
             tabBarIcon: ({ color, focused }) => (
-              <Ionicons name={focused ? 'hammer' : 'hammer-outline'} color={color} size={26} />
+              <Ionicons name={focused ? 'hammer' : 'hammer-outline'} color={fgColor} size={26} />
             ),
           }}
         />
@@ -51,16 +58,7 @@ export default function TabLayout() {
           options={{
             title: 'Order',
             tabBarIcon: ({ color, focused }) => (
-              <MaterialCommunityIcons name={focused ? 'briefcase-download' : 'briefcase-download-outline'} color={color} size={26} />
-            ),
-          }}
-        />
-        <Tabs.Screen
-          name="cart"
-          options={{
-            title: 'Cart',
-            tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon name={focused ? 'cart' : 'cart-outline'} color={color} />
+              <MaterialCommunityIcons name={focused ? 'briefcase-download' : 'briefcase-download-outline'} color={fgColor} size={26} />
             ),
           }}
         />
@@ -69,7 +67,7 @@ export default function TabLayout() {
           options={{
             title: 'Profile',
             tabBarIcon: ({ color, focused }) => (
-              <MaterialCommunityIcons name={focused ? 'account' : 'account-outline'} color={color} size={26} />
+              <MaterialCommunityIcons name={focused ? 'account' : 'account-outline'} color={fgColor} size={26} />
             ),
           }}
         />
