@@ -1,49 +1,33 @@
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import TopBar from '@/components/pawnpawn/TopBar';
 import HorizontalList from '@/components/pawnpawn/HorizontalScrollList';
+import ProductsGrid from '@/components/pawnpawn/ProductsGrid';
+import { useState } from 'react';
 
-const products = [
-  {
-    id: 1,
-    name: 'Exclusive Sunglasses',
-    price: '120.00',
-    image: require('../../assets/images/sunglasses.jpg'),
-  },
-  {
-    id: 2,
-    name: 'Luxury Handbag',
-    price: '850.00',
-    image: require('../../assets/images/handbag.jpeg'),
-  },
-  {
-    id: 3,
-    name: 'Exclusive Sunglasses',
-    price: '120.50',
-    image: require('../../assets/images/sunglasses.jpg'),
-  },
-  {
-    id: 4,
-    name: 'Luxury Handbag',
-    price: '850.00',
-    image: require('../../assets/images/handbag.jpeg'),
-  },
-  {
-    id: 5,
-    name: 'Exclusive Sunglasses',
-    price: '120.50',
-    image: require('../../assets/images/sunglasses.jpg'),
-  },
-  {
-    id: 6,
-    name: 'Luxury Handbag',
-    price: '850.00',
-    image: require('../../assets/images/handbag.jpeg'),
-  },
+// Category interface can be defined in a shared file or here
+interface Category {
+  id: string;
+  name: string;
+  icon: string;
+}
+
+const categories: Category[] = [
+  { id: 'business', name: 'Business', icon: 'briefcase' },
+  { id: 'tech', name: 'Tech', icon: 'hardware-chip' },
+  { id: 'design', name: 'Design', icon: 'build' },
+  { id: 'business2', name: 'Business', icon: 'briefcase' },
+  { id: 'tech2', name: 'Tech', icon: 'hardware-chip' },
+  { id: 'design2', name: 'Design', icon: 'build' },
+  { id: 'business3', name: 'Business', icon: 'briefcase' },
+  { id: 'tech3', name: 'Tech', icon: 'hardware-chip' },
+  { id: 'design3', name: 'Design', icon: 'build' },
 ];
 
 export default function ProductManagement() {
-  const router = useRouter();
+  // const router = useRouter();
+
+  const [selectedCategory, setSelectedCategory] = useState('business');
 
   return (
     <View style={{flex:1, backgroundColor:"white", }}>
@@ -52,22 +36,12 @@ export default function ProductManagement() {
 
       <ScrollView style={styles.container}>
         { /* Categories */ }
-        <HorizontalList />
+        <HorizontalList 
+              categories={categories}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}/>
 
-        <Text style={styles.header}>Personal Collection</Text>
-        <View style={styles.grid}>
-          {products.map((product) => (
-            <TouchableOpacity
-              key={product.id}
-              style={styles.card}
-              onPress={() => router.push(`../product/${product.id}`)}
-            >
-              <Image source={product.image} style={styles.image} />
-              <Text style={styles.name}>{product.name}</Text>
-              <Text style={styles.price}>${product.price}</Text>
-            </TouchableOpacity>
-          ))}
-        </View>
+        <ProductsGrid />
       </ScrollView>
     </View>
   );
@@ -79,43 +53,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#f8f8f8',
     marginBottom: 16,
     padding: 5,
-  },
-  header: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 20,
-  },
-  grid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-  },
-  card: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    padding: 15,
-    width: '48%',
-    marginBottom: 20,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    shadowOffset: { width: 0, height: 5 },
-  },
-  image: {
-    width: '100%',
-    height: 150,
-    borderRadius: 10,
-  },
-  name: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
-    marginVertical: 10,
-  },
-  price: {
-    fontSize: 16,
-    color: '#e94560',
   },
 });

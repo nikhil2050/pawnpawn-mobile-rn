@@ -4,3 +4,4 @@ Reference:  https://docs.expo.dev/guides/new-architecture/
             https://blog.expo.dev/the-new-expo-cli-f4250d8e3421
 
 ---
+18-11-2024 : Passing categories to HorizontalScrollList through params and Added ProductsGrid component
